@@ -1,0 +1,19 @@
+{{set . "title" "New card"}}
+{{template "header.html" .}}
+
+<header>
+  <form name="input" action="/cards" method="post">
+    <input type="text" name="phrase">
+    <input type="submit" value="Translate">
+  </form>
+</header>
+<div class="container">
+  <div class="row">
+    <div class="span6">
+      {{template "flash.html" .}}
+    </div>
+  </div>
+</div>
+
+{{template "footer.html" .}}
+
