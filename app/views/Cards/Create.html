@@ -1,0 +1,22 @@
+{{set . "title" "New card"}}
+{{template "header.html" .}}
+
+<header>
+hunnnn
+{{.results}}
+{{ range $item := .results }}
+    {{ $item }}
+    <br />
+{{ end }}
+</header>
+<div class="container">
+  <div class="row">
+    <div class="span6">
+      {{template "flash.html" .}}
+    </div>
+  </div>
+</div>
+
+{{template "footer.html" .}}
+
+
