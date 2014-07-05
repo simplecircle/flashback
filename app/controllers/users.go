@@ -8,6 +8,7 @@ import(
   "code.google.com/p/go.crypto/bcrypt"
   "reflect"
   "github.com/dchest/uniuri"
+  "net/http"
   //"time"
 )
 
@@ -40,7 +41,15 @@ func (c Users) Create(email, password string) revel.Result {
   fmt.Println(authToken)
   user := &User{Id: bson.NewObjectId(), Email: email, Password: bcryptPassword, AuthToken: authToken}
   err = coll.Insert(user)
+  if err != nil {
+    panic(err)
+  }
 
+  c.SetCookie(&http.Cookie{
+		Name:     "authToken",
+		Value:    authToken,
+		Path:     "/",
+	})
 
   fmt.Println(bcryptPassword)
   fmt.Println(user.Password)
