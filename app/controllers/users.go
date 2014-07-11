@@ -8,6 +8,7 @@ import(
   "code.google.com/p/go.crypto/bcrypt"
   "github.com/dchest/uniuri"
   "net/http"
+  "flashback/app/models"
   //"reflect"
   //"strings"
 )
@@ -15,19 +16,12 @@ import(
 type Users struct {
 	*revel.Controller
 }
-type User struct {
-  Id    bson.ObjectId `bson:"_id"`
-  Email        string
-  Password     []byte
-  AuthToken    string
-}
-
 
 func (c Users) New() revel.Result {
   return c.Render()
 }
 
-func (c Users) CurrentUser() User {
+func (c Users) CurrentUser() models.User {
   session, err := mgo.Dial("mongodb://elliottg:monkey75@kahana.mongohq.com:10026/flashbackDev")
   if err != nil {
           panic(err)
@@ -35,7 +29,7 @@ func (c Users) CurrentUser() User {
   defer session.Close()
   cookie, _ := c.Request.Cookie("authToken")
   cookieAuthToken := cookie.Value
-  currentUser := User{}
+  currentUser := models.User{}
   coll := session.DB("flashbackDev").C("users")
   coll.Find(bson.M{"authtoken" : cookieAuthToken}).One(&currentUser)
   if err != nil {
@@ -55,7 +49,7 @@ func (c Users) Create(email, password string) revel.Result {
   coll := session.DB("flashbackDev").C("users")
   bcryptPassword, _ := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
   authToken := uniuri.NewLen(22)
-  user := &User{Id: bson.NewObjectId(), Email: email, Password: bcryptPassword, AuthToken: authToken}
+  user := &models.User{Id: bson.NewObjectId(), Email: email, Password: bcryptPassword, AuthToken: authToken}
   err = coll.Insert(user)
   if err != nil {
     panic(err)
@@ -76,7 +70,7 @@ func (c Users) Create(email, password string) revel.Result {
    if err != nil {
       panic(err)
   }
-  var updatedUser User
+  var updatedUser models.User
   coll.FindId(user.Id).One(&updatedUser)
   //fmt.Println(updatedUser.Password)
   ////fmt.Println(user.Id)
