@@ -1,2 +1,7 @@
 <h1>Deutch Wort hier...</h1>
 {{ .currentUser.Email}}
+<hr/>
+{{ range $card := .cards }}
+    {{ $card.SourceLang}}
+    <br />
+{{ end }}

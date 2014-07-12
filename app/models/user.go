@@ -1,9 +1,6 @@
 package models
 
 import(
-  //"fmt"
-  //"github.com/revel/revel"
-  //"labix.org/v2/mgo"
   "labix.org/v2/mgo/bson"
 )
 

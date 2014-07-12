@@ -15,29 +15,13 @@ import(
 
 type Users struct {
 	*revel.Controller
+  Helpers
 }
 
 func (c Users) New() revel.Result {
   return c.Render()
 }
 
-func (c Users) CurrentUser() models.User {
-  session, err := mgo.Dial("mongodb://elliottg:monkey75@kahana.mongohq.com:10026/flashbackDev")
-  if err != nil {
-          panic(err)
-  }
-  defer session.Close()
-  cookie, _ := c.Request.Cookie("authToken")
-  cookieAuthToken := cookie.Value
-  currentUser := models.User{}
-  coll := session.DB("flashbackDev").C("users")
-  coll.Find(bson.M{"authtoken" : cookieAuthToken}).One(&currentUser)
-  if err != nil {
-          panic(err)
-  }
-  //fmt.Println(currentUser.Email)
-  return currentUser
-}
 func (c Users) Create(email, password string) revel.Result {
   session, err := mgo.Dial("mongodb://elliottg:monkey75@kahana.mongohq.com:10026/flashbackDev")
   if err != nil {
