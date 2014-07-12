@@ -20,12 +20,12 @@ func (c Cards) New() revel.Result {
 
 func (c Cards) Index() revel.Result {
   currentUser := c.CurrentUser()
-  coll2 := models.Db("cards")
+  //coll2 := models.Collection()
+  coll2 := models.Collection("cards")
   var cards []models.Card
 fmt.Println(reflect.TypeOf(coll2))
 fmt.Println(currentUser.Id)
   coll2.Find(bson.M{"userid": currentUser.Id}).All(&cards)
-
   //session, err := mgo.Dial("mongodb://elliottg:monkey75@kahana.mongohq.com:10026/flashbackDev")
   //if err != nil {
           //panic(err)
