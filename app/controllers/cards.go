@@ -20,25 +20,14 @@ func (c Cards) New() revel.Result {
 
 func (c Cards) Index() revel.Result {
   currentUser := c.CurrentUser()
-  //coll2 := models.Collection()
-  coll2 := models.Collection("cards")
+  coll := models.Card{}.Collection()
   var cards []models.Card
-fmt.Println(reflect.TypeOf(coll2))
-fmt.Println(currentUser.Id)
-  coll2.Find(bson.M{"userid": currentUser.Id}).All(&cards)
-  //session, err := mgo.Dial("mongodb://elliottg:monkey75@kahana.mongohq.com:10026/flashbackDev")
-  //if err != nil {
-          //panic(err)
-  //}
-  //defer session.Close()
-	//session.SetMode(mgo.Monotonic, true)
-
-  //coll := session.DB("flashbackDev").C("cards")
-//fmt.Println(reflect.TypeOf(coll))
-  //err = coll.Find(bson.M{"userid": currentUser.Id}).All(&cards)
-  //if err != nil {
-          //panic(err)
-  //}
+fmt.Println(reflect.TypeOf(coll))
+//fmt.Println(currentUser.Id)
+err := coll.Find(bson.M{"userid": currentUser.Id}).All(&cards)
+  if err != nil {
+          panic(err)
+  }
 	return c.Render(currentUser, cards)
 }
 

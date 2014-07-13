@@ -1,12 +1,12 @@
-package conf
+package db
 
 import(
   "labix.org/v2/mgo"
-  //"reflect"
+  "reflect"
   "fmt"
 )
 
-func Db() *mgo.Database {
+func Connect() *mgo.Database {
   session, err := mgo.Dial("mongodb://elliottg:monkey75@kahana.mongohq.com:10026/flashbackDev")
   if err != nil {
           panic(err)
@@ -14,10 +14,9 @@ func Db() *mgo.Database {
   //defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 
-  //db := session.DB("flashbackDev").C("cards")
   database := session.DB("flashbackDev")
-  fmt.Println("inner+++++++++++++++++++")
-  //fmt.Println(reflect.TypeOf(database))
+  fmt.Println("connect +++++++++++++++++++")
+  fmt.Println(reflect.TypeOf(database))
   return database
 
 }
