@@ -1,12 +1,12 @@
 package controllers
 
 import(
-  "fmt"
   "github.com/revel/revel"
   "labix.org/v2/mgo"
   "labix.org/v2/mgo/bson"
   "flashback/app/models"
-  "reflect"
+  //"reflect"
+  //"fmt"
 )
 
 type Cards struct {
@@ -20,14 +20,12 @@ func (c Cards) New() revel.Result {
 
 func (c Cards) Index() revel.Result {
   currentUser := c.CurrentUser()
-  coll := models.Card{}.Collection()
+  coll := models.Card{}.Coll()
   var cards []models.Card
-fmt.Println(reflect.TypeOf(coll))
-//fmt.Println(currentUser.Id)
-err := coll.Find(bson.M{"userid": currentUser.Id}).All(&cards)
-  if err != nil {
-          panic(err)
-  }
+  err := coll.Find(bson.M{"userid": currentUser.Id}).All(&cards)
+    if err != nil {
+            panic(err)
+    }
 	return c.Render(currentUser, cards)
 }
 

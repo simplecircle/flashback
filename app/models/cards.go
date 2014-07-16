@@ -18,12 +18,9 @@ type Card struct {
 func NewCard() *Card {
   return &Card{CollName: "cards"}
 }
-func (m Card) Collection() *mgo.Collection {
+
+func (m Card) Coll() *mgo.Collection {
   coll := db.Connect().C(NewCard().CollName)
-  //coll := db.Connect().C(collection)
-  //fmt.Println("+++++++++++++++++++")
-  //fmt.Println(reflect.TypeOf(coll))
-  //fmt.Println(coll)
   return coll
 }
 

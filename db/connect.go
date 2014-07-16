@@ -2,8 +2,8 @@ package db
 
 import(
   "labix.org/v2/mgo"
-  "reflect"
-  "fmt"
+  //"reflect"
+  //"fmt"
 )
 
 func Connect() *mgo.Database {
@@ -13,10 +13,6 @@ func Connect() *mgo.Database {
   }
   //defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
-
   database := session.DB("flashbackDev")
-  fmt.Println("connect +++++++++++++++++++")
-  fmt.Println(reflect.TypeOf(database))
   return database
-
 }

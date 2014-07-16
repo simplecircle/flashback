@@ -1,0 +1,19 @@
+{{set . "title" "Sign Up"}}
+{{template "header.html" .}}
+<h1>Sign In</h1>
+<div class="container">
+  <div class="row">
+    <div class="span6">
+      {{template "flash.html" .}}
+    </div>
+  </div>
+</div>
+<header>
+  <form name="input" action="/sessions" method="post">
+    <input type="text" name="email">
+    <input type="password" name="password">
+    <input type="submit" value="Sign In">
+  </form>
+  <a href="/users/new">Sign up</a>
+</header>
+{{template "footer.html" .}}

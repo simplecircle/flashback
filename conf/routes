@@ -10,6 +10,8 @@ POST    /users                                  Users.Create
 GET     /cards                                  Cards.Index
 GET     /cards/new                              Cards.New
 POST    /cards                                  Cards.Create
+GET     /sessions/new                           Sessions.New
+POST    /sessions                               Sessions.Create
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
