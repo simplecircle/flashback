@@ -20,15 +20,19 @@ func (c Cards) New() revel.Result {
 
 func (c Cards) Index() revel.Result {
   currentUser := c.CurrentUser()
-  coll := models.Card{}.Coll()
-  var cards []models.Card
 
-  fmt.Println(currentUser.Id)
-  err := coll.Find(bson.M{"userid": currentUser.Id}).All(&cards)
-    if err != nil {
-            panic(err)
-    }
-	return c.Render(currentUser, cards)
+  if currentUser.Email != "" {
+    coll := models.Card{}.Coll()
+    var cards []models.Card
+
+    fmt.Println(currentUser.Id)
+    err := coll.Find(bson.M{"userid": currentUser.Id}).All(&cards)
+      if err != nil {
+              panic(err)
+      }
+    return c.Render(currentUser, cards)
+  }
+  return c.Redirect(Sessions.New)
 }
 
 func (c Cards) Create(phrase string) revel.Result {

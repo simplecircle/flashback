@@ -19,13 +19,16 @@ func (c Helpers) CurrentUser() models.User {
   }
   defer session.Close()
   cookie, _ := c.Request.Cookie("authToken")
-  cookieAuthToken := cookie.Value
   currentUser := models.User{}
 
-  coll := session.DB("flashbackDev").C("users")
-  coll.Find(bson.M{"authtoken" : cookieAuthToken}).One(&currentUser)
-  if err != nil {
-          panic(err)
+  if cookie != nil {
+    cookieAuthToken := cookie.Value
+    coll := session.DB("flashbackDev").C("users")
+    coll.Find(bson.M{"authtoken" : cookieAuthToken}).One(&currentUser)
+    if err != nil {
+      panic(err)
+    }
+    return currentUser
   }
   return currentUser
 }

@@ -12,6 +12,7 @@ GET     /cards/new                              Cards.New
 POST    /cards                                  Cards.Create
 GET     /sessions/new                           Sessions.New
 POST    /sessions                               Sessions.Create
+GET     /sessions/delete                        Sessions.Destroy
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
