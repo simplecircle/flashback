@@ -5,6 +5,7 @@ import (
   "labix.org/v2/mgo"
   "labix.org/v2/mgo/bson"
   "flashback/app/models"
+  //"fmt"
 )
 
 type Helpers struct {
@@ -20,6 +21,7 @@ func (c Helpers) CurrentUser() models.User {
   cookie, _ := c.Request.Cookie("authToken")
   cookieAuthToken := cookie.Value
   currentUser := models.User{}
+
   coll := session.DB("flashbackDev").C("users")
   coll.Find(bson.M{"authtoken" : cookieAuthToken}).One(&currentUser)
   if err != nil {

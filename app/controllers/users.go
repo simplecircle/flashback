@@ -1,13 +1,14 @@
 package controllers
 
 import(
-  "fmt"
+  //"fmt"
   "github.com/revel/revel"
   "labix.org/v2/mgo"
   "labix.org/v2/mgo/bson"
   "code.google.com/p/go.crypto/bcrypt"
   "github.com/dchest/uniuri"
   "net/http"
+  "time"
   "flashback/app/models"
   //"reflect"
   //"strings"
@@ -43,28 +44,18 @@ func (c Users) Create(email, password string) revel.Result {
 		Name:     "authToken",
 		Value:    authToken,
 		Path:     "/",
+    Expires:  time.Now().Add(365*24*time.Hour), // One year cookie
 	})
-  //fmt.Println(http.ReadSetCookies(c.Request.Header))
 
-  //fmt.Println(bcryptPassword)
-  //fmt.Println(user.Password)
-  //fmt.Println(reflect.TypeOf(user.Password).Kind())
-  //fmt.Println(reflect.TypeOf(bcryptPassword).Kind())
-  err = bcrypt.CompareHashAndPassword(user.Password, []byte(password))
-   if err != nil {
-      panic(err)
-  }
-  var updatedUser models.User
-  coll.FindId(user.Id).One(&updatedUser)
-  //fmt.Println(updatedUser.Password)
-  ////fmt.Println(user.Id)
-  //revel.TRACE.Printf(email)
-  //revel.TRACE.Printf(password)
-  if err != nil {
-          panic(err)
-  }
-
-
-  fmt.Println(c.CurrentUser().Email)
+  //err = bcrypt.CompareHashAndPassword(user.Password, []byte(password))
+   //if err != nil {
+      //panic(err)
+  //}
+  //var updatedUser models.User
+  //coll.FindId(user.Id).One(&updatedUser)
+  //if err != nil {
+          //panic(err)
+  //}
+  //fmt.Println(c.CurrentUser().Email)
 	return c.Redirect(Cards.Index)
 }

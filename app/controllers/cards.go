@@ -6,7 +6,7 @@ import(
   "labix.org/v2/mgo/bson"
   "flashback/app/models"
   //"reflect"
-  //"fmt"
+  "fmt"
 )
 
 type Cards struct {
@@ -22,6 +22,8 @@ func (c Cards) Index() revel.Result {
   currentUser := c.CurrentUser()
   coll := models.Card{}.Coll()
   var cards []models.Card
+
+  fmt.Println(currentUser.Id)
   err := coll.Find(bson.M{"userid": currentUser.Id}).All(&cards)
     if err != nil {
             panic(err)

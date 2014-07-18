@@ -4,8 +4,6 @@ import(
   "labix.org/v2/mgo/bson"
   "labix.org/v2/mgo"
   "flashback/db"
-  //"fmt"
-  //"reflect"
 )
 
 type Card struct {
