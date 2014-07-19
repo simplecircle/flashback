@@ -2,7 +2,6 @@ package controllers
 
 import (
   "github.com/revel/revel"
-  "labix.org/v2/mgo"
   "labix.org/v2/mgo/bson"
   "flashback/app/models"
   //"fmt"
@@ -13,18 +12,12 @@ type Helpers struct {
 }
 
 func (c Helpers) CurrentUser() models.User {
-  session, err := mgo.Dial("mongodb://elliottg:monkey75@kahana.mongohq.com:10026/flashbackDev")
-  if err != nil {
-          panic(err)
-  }
-  defer session.Close()
-  cookie, _ := c.Request.Cookie("authToken")
   currentUser := models.User{}
+  cookie, _ := c.Request.Cookie("authToken")
 
   if cookie != nil {
-    cookieAuthToken := cookie.Value
-    coll := session.DB("flashbackDev").C("users")
-    coll.Find(bson.M{"authtoken" : cookieAuthToken}).One(&currentUser)
+    coll := models.User{}.Coll()
+    err := coll.Find(bson.M{"authtoken" : cookie.Value}).One(&currentUser)
     if err != nil {
       panic(err)
     }

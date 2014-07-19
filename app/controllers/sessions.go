@@ -8,8 +8,6 @@ import(
   "time"
   "net/http"
   //"fmt"
-  //"reflect"
-  //"strings"
 )
 
 type Sessions struct {
@@ -22,7 +20,7 @@ func (c Sessions) New() revel.Result {
 }
 
 func (c Sessions) Create(email, password string) revel.Result {
-  var user models.User
+  user := models.User{}
   coll := models.User{}.Coll()
   coll.Find(bson.M{"email": email}).One(&user)
 
