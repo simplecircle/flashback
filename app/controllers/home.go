@@ -2,10 +2,10 @@ package controllers
 
 import "github.com/revel/revel"
 
-type App struct {
+type Home struct {
 	*revel.Controller
 }
 
-func (c App) Index() revel.Result {
+func (c Home) Index() revel.Result {
 	return c.Render()
 }

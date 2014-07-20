@@ -4,17 +4,14 @@
   <head>
     <title>{{.title}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap-theme.css">
     <link rel="shortcut icon" type="image/png" href="/public/img/favicon.png">
     <script src="/public/js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
-    {{range .moreStyles}}
-      <link rel="stylesheet" type="text/css" href="/public/{{.}}">
-    {{end}}
-    {{range .moreScripts}}
-      <script src="/public/{{.}}" type="text/javascript" charset="utf-8"></script>
-    {{end}}
+    <script src="/public/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="/public/css/global.css">
   </head>
   <body>
     <header>
-      <a href="/sessions/delete">Log out</a>
+    <!--<a href="/sessions/delete">Log out</a>-->
     </header>

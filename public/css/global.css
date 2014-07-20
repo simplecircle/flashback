@@ -1,0 +1,32 @@
+body{
+  background:#78e346;
+}
+.logo{
+  color:#e6fcdb;
+  font-size:74px;
+  margin-bottom:0;
+  padding-bottom:0;
+  text-align: center;
+}
+.tag-line{
+  color:#bafc9c;
+  font-size:30px;
+  margin-top:0;
+  padding-top:0;
+  text-align: center;
+}
+.auth-panel{
+  margin-top:100px;
+}
+.auth-panel__btn{
+  border: 2px solid #3dad09;
+  font-size:21px;
+  color:#339c02;
+}
+.auth-panel__btn:hover {
+  color:#339c02;
+}
+.auth-panel__link{
+  color:#339c02;
+  font-size:18px;
+}
