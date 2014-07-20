@@ -1,18 +1,28 @@
 {{set . "title" "Sign Up"}}
 {{template "header.html" .}}
-<h1>Sign Up</h1>
-<header>
-  <form name="input" action="/users" method="post">
-    <input type="text" name="email">
-    <input type="password" name="password">
-    <input type="submit" value="Sign Up">
-  </form>
-  <a href="/sessions/new">Login</a>
-</header>
+
 <div class="container">
   <div class="row">
-    <div class="span6">
+    <div class="col-md-12">
+      <header>
+        <h1 class="logo">FlashBack</h1>
+      </header>
+
       {{template "flash.html" .}}
+
+      <section class="auth-panel text-center">
+        <form name="input" action="/users" method="post">
+          <div class="form-group">
+            <input type="text" name="email" class="form-control auth-panel__text-field" placeholder="Email">
+          </div>
+          <div class="form-group">
+          <input type="password" name="password" class="form-control auth-panel__text-field" placeholder="Password">
+          </div>
+          <input type="submit" value="Sign Up" class="auth-panel__btn btn btn-block">
+        </form>
+        <br />
+        <a href="/sessions/new" class="auth-panel__link">Login</a>
+      </section>
     </div>
   </div>
 </div>
